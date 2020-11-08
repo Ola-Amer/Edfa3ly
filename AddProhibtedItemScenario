@@ -1,0 +1,35 @@
+package edf3ly;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.Assert;
+
+
+public class AddProhibtedItemScenario {
+
+	public static void main(String[] args) throws InterruptedException {
+		AddProhibtedItemScenario AddProhibtedItemScenario = new AddProhibtedItemScenario();	
+		AddProhibtedItemScenario.addProhibitedProduct();
+	}
+	
+	
+	
+	public void addProhibitedProduct() throws InterruptedException {
+		//Launch the application in Google Chrome browser
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\oaamer\\eclipse-workspace\\SeleniumDemo2\\src\\drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.edfa3ly.com/cart");
+		//Enter mandatory fields 
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='url']")));//to wait until the page load and input field appears otherwise it will give error as the input field will not be found
+		driver.findElement(By.xpath("//input[@name='url']")).sendKeys("https://www.goat.com/sneakers/shane-sb-premium-light-orewood-brown-cv5500-200");//Set input field "url" with URL of the item need to add
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[@class='visibility ng-binding ng-scope']")));//Wait until warning message appears
+		Assert.assertEquals(driver.findElement(By.xpath("//label[@class='visibility ng-binding ng-scope']")).getText(),"we apologize, store is not available at this moment");
+		Thread.sleep(10000); //wait for 10 seconds
+		driver.close();//Close Google Chrome
+	}
+
+}
