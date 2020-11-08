@@ -1,0 +1,42 @@
+package edf3ly;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.Assert;
+
+
+public class AddAutomatedProductItemScenario {
+
+	public static void main(String[] args) throws InterruptedException {
+		AddAutomatedProductItemScenario abstractionDemo = new AddAutomatedProductItemScenario();
+		abstractionDemo.addAutomatedProduct();	
+	}
+	
+	
+	public void addAutomatedProduct() throws InterruptedException {
+		//Launch the application in Google Chrome browser
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\oaamer\\eclipse-workspace\\SeleniumDemo2\\src\\drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.edfa3ly.com/cart");
+		//Enter mandatory fields 
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='url']")));//to wait until the page load and input field appears otherwise it will give error as the input field will not be found
+		driver.findElement(By.xpath("//input[@name='url']")).sendKeys("https://www.shein.com/CUCCOO-The-Everyone-Sneakers-p-1187851-cat-1913.html");//Set input field "url" with URL of the item need to add
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@name='size']")));
+		Select dropdown = new Select(driver.findElement(By.xpath("//select[@name='size']")));  
+		dropdown.selectByIndex(2);//Select 5th value from size list.Please if you need another size change 2 to the index you want
+		//Add the entered item to the cart
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Add item']")));
+		driver.findElement(By.xpath("//input[@value='Add item']")).click();
+		//Check the confirmation message that item is added successfully
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='message ng-pristine ng-untouched ng-valid ng-binding ng-not-empty']")));//Wait until success message appears
+		Assert.assertEquals(driver.findElement(By.xpath("//span[@class='message ng-pristine ng-untouched ng-valid ng-binding ng-not-empty']")).getText(),"Item has been added to your cart");
+		Thread.sleep(10000); //wait for 10 seconds
+		driver.close(); //Close Google Chrome
+	}
+
+}
