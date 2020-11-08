@@ -11,4 +11,5 @@ How to run the scenarios?
 
 - Download all jar files attached to the project(Selenium standalone server,Selenium Client & WebDriver language bindings,Google chrome driver and junit)
 
+- Download Java <= 1.8 (Higher versions will not work)
 
