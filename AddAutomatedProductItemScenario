@@ -12,8 +12,8 @@ import org.junit.Assert;
 public class AddAutomatedProductItemScenario {
 
 	public static void main(String[] args) throws InterruptedException {
-		AddAutomatedProductItemScenario abstractionDemo = new AddAutomatedProductItemScenario();
-		abstractionDemo.addAutomatedProduct();	
+		AddAutomatedProductItemScenario AddAutomatedProductItemScenario = new AddAutomatedProductItemScenario();
+		AddAutomatedProductItemScenario.addAutomatedProduct();	
 	}
 	
 	
