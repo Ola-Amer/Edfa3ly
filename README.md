@@ -31,5 +31,5 @@ How to run the scenarios?
 
 - Create a folder in src then take chromedriver.exe copy and paste it in the folder
 
-- Create a new package in src then add AddAutomatedProductItemScenario and AddProhibtedItemScenario classes that attached to the project to the package (Don't forget to change package name in the class to be the same as created package name)
+- Create a new package in src then add two classes one for each scenario and take code copy from AddAutomatedProductItemScenario and AddProhibtedItemScenario file and paste the code in the project (Donot forget to change package name to correct name and class name)
 
